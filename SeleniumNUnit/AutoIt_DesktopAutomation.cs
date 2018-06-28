@@ -29,10 +29,10 @@ namespace SeleniumNUnit
             Console.WriteLine("Open File: " + fullFilePath);
 
             IWebElement searchByImageButton = driver.FindElement(By.XPath("//span[@id='qbi']"));
-
+            searchByImageButton.Click();
             IWebElement searchByImageWindow = driver.FindElement(By.XPath("//div[@id='qbp']"));
 
-            IWebElement tabUploadImage = searchByImageWindow.FindElement(By.XPath("//span[@Class='bd qbtbtxt qbclr']"));
+            IWebElement tabUploadImage = searchByImageWindow.FindElement(By.XPath("//div[@Class='qbtbha sl']"));
             tabUploadImage.Click();
 
             IWebElement btnChoosefile  = searchByImageWindow.FindElement(By.XPath("//input[@id='qbfile']"));
