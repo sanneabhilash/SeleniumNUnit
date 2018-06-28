@@ -1,2 +1,8 @@
 SeleniumNUnit/obj/
 SeleniumNUnit/bin/
+.vs/SeleniumNUnit/v15/.suo
+.vs/SeleniumNUnit/DesignTimeBuild/.dtbcache
+.vs/SeleniumNUnit/v15/Server/sqlite3/storage.ide
+*.lock
+*.ide-wal
+*.ide-shm

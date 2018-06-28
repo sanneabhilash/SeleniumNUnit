@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -39,11 +29,13 @@ namespace SeleniumNUnit
 
             //Navigates the browser to given URL
             driver.Navigate().GoToUrl("http://google.com");
-            check.Until(ExpectedConditions.ElementExists(By.Name("btnK"))); 
+           // check.Until(ExpectedConditions.ElementExists(By.Name("btnK")));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
+            var element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name("btnK")));
             Assert.True(driver.Url.Contains("https://www.google"), "Validate Navigation to google url");
 
             driver.Navigate().GoToUrl("https://www.facebook.com/");//Clicks on forward button of browser, navigates as per browseer history
-            IWebElement CreateAccount = check.Until(ExpectedConditions.ElementToBeClickable(By.Name("websubmit")));
+            IWebElement CreateAccount = check.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Name("websubmit")));
             Assert.AreEqual(driver.Url, "https://www.facebook.com/", "Validate Navigation to facebook url");
 
             //************** Default wait is Webdriver independent
@@ -72,12 +64,12 @@ namespace SeleniumNUnit
             //There is a button which color will change after some time
             //You have to wait for the newc color
             driver.Navigate().GoToUrl("http://toolsqa.wpengine.com/automation-practice-switch-windows/");
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
+            wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
             Func<IWebDriver, bool> waitForElement = new Func<IWebDriver, bool>((IWebDriver Web) =>
             {
                 Console.WriteLine("Waiting for color to change");
-                IWebElement element = Web.FindElement(By.Id("target"));
-                if (element.GetAttribute("style").Contains("red"))
+                IWebElement ele = Web.FindElement(By.Id("target"));
+                if (ele.GetAttribute("style").Contains("red"))
                 {
                     return true;
                 }
